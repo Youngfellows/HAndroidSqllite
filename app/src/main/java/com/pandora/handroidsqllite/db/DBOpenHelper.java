@@ -69,4 +69,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d(TAG, "onUpgrade ");
     }
+
+    /**
+     * 获取数据库路径
+     *
+     * @return
+     */
+    public String getDBPath() {
+        String path = mContext.getDatabasePath(DB_NAME).getPath();
+        return path;
+    }
 }

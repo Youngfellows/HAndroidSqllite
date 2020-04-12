@@ -60,7 +60,9 @@ public class SQLBaseActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
             Log.d(TAG, "onItemClick ");
-            Toast.makeText(SQLBaseActivity.this, "xxxx", Toast.LENGTH_SHORT).show();
+            String dbPath = StudentDBHelper.getInstance().getDatabasePath();
+            Toast.makeText(SQLBaseActivity.this, dbPath, Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onItemClick : dbPath = " + dbPath);
         }
 
         @Override

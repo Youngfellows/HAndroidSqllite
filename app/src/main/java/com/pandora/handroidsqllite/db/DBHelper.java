@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.pandora.handroidsqllite.MyApp;
+
 import java.util.List;
 
 /**
@@ -22,7 +23,9 @@ public abstract class DBHelper<T> {
      * @return
      */
     protected SQLiteDatabase getDatebase() {
-        mDbOpenHelper = new DBOpenHelper(MyApp.getContext());
+        if (mDbOpenHelper == null) {
+            mDbOpenHelper = new DBOpenHelper(MyApp.getContext());
+        }
         SQLiteDatabase db = mDbOpenHelper.getInstance();
         return db;
     }
@@ -54,6 +57,18 @@ public abstract class DBHelper<T> {
             }
         }
         return false;
+    }
+
+    /**
+     * 获取数据库路径
+     *
+     * @return
+     */
+    public String getDatabasePath() {
+        if (mDbOpenHelper == null) {
+            mDbOpenHelper = new DBOpenHelper(MyApp.getContext());
+        }
+        return mDbOpenHelper.getDBPath();
     }
 
     /**
