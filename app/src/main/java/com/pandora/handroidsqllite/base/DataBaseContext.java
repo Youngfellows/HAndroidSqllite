@@ -17,6 +17,8 @@ public class DataBaseContext extends ContextWrapper {
 
     private String TAG = this.getClass().getSimpleName();
 
+    private String DATABASES = "databases";
+
     public DataBaseContext(Context base) {
         super(base);
     }
@@ -33,7 +35,7 @@ public class DataBaseContext extends ContextWrapper {
         String dirPath = SDCardUtil.getInnerSDCardPath();
 
         String path = null;
-        File parentFile = new File(dirPath, packageName);
+        File parentFile = new File(dirPath, packageName + File.separator + DATABASES);
         dirPath = parentFile.getAbsolutePath();
         Log.d(TAG, "getDatabasePath: dirPath = " + dirPath);
 
@@ -41,11 +43,13 @@ public class DataBaseContext extends ContextWrapper {
             parentFile.mkdirs();
         }
         String parentPath = parentFile.getAbsolutePath();
-        if (parentPath.lastIndexOf("\\/") != -1) {
-            path = dirPath + File.separator + name;
-        } else {
-            path = dirPath + File.separator + name;
-        }
+        //        if (parentPath.lastIndexOf("\\/") != -1) {
+        //            path = dirPath + File.separator + name;
+        //        } else {
+        //            path = dirPath + File.separator + name;
+        //        }
+        path = dirPath + File.separator + name;
+
         File file = new File(path);
 
         return file;

@@ -1,6 +1,5 @@
 package com.pandora.handroidsqllite.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -171,7 +170,7 @@ public class SQLBaseActivity extends PermissionsActivity {
      */
     public void onCopyDB(View view) {
         Log.d(TAG, "onCopyDB ");
-        DBManager.getInstance().getDataBase();
+        DBManager.getInstance();
     }
 
     @Override
