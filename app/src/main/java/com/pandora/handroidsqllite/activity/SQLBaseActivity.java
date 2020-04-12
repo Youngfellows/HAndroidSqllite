@@ -117,7 +117,8 @@ public class SQLBaseActivity extends AppCompatActivity {
         int age = Integer.parseInt(mEtAge.getText().toString());
         Student student = new Student(name, sex, age);
         StudentDBHelper dbHelper = StudentDBHelper.getInstance();
-        dbHelper.update(student);
+        boolean update = dbHelper.update(student);
+        Log.d(TAG, "onUpdataData : update = " + update);
 
         List<Student> students = dbHelper.queryAll();
         mStudentAdapter.update(students);

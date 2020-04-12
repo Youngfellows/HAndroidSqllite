@@ -66,15 +66,15 @@ public abstract class DBHelper<T> {
     /**
      * 添加
      */
-    public abstract void insert(T t);
+    public abstract boolean insert(T t);
 
     /**
      * 删除
      */
-    public abstract void delete(T t);
+    public abstract boolean delete(T t);
 
     /**
      * 更新
      */
-    public abstract void update(T t);
+    public abstract boolean update(T t);
 }
