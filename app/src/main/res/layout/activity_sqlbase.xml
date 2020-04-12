@@ -72,6 +72,12 @@
             android:onClick="onCopyDB"
             android:text="拷贝数据库"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onQueryPoi"
+            android:text="查询POI位置"/>
+
     </LinearLayout>
 
     <LinearLayout
