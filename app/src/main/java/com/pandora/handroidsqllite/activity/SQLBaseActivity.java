@@ -13,6 +13,7 @@ import com.pandora.handroidsqllite.R;
 import com.pandora.handroidsqllite.adapter.StudentAdapter;
 import com.pandora.handroidsqllite.base.PermissionsActivity;
 import com.pandora.handroidsqllite.bean.Student;
+import com.pandora.handroidsqllite.db.DBManager;
 import com.pandora.handroidsqllite.db.helper.StudentDBHelper;
 
 import java.util.ArrayList;
@@ -160,6 +161,17 @@ public class SQLBaseActivity extends PermissionsActivity {
         StudentDBHelper dbHelper = StudentDBHelper.getInstance();
         List<Student> students = dbHelper.queryAll();
         mStudentAdapter.update(students);
+    }
+
+
+    /**
+     * 拷贝Assets数据库
+     *
+     * @param view
+     */
+    public void onCopyDB(View view) {
+        Log.d(TAG, "onCopyDB ");
+        DBManager.getInstance().getDataBase();
     }
 
     @Override
