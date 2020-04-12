@@ -1,4 +1,4 @@
-package com.pandora.handroidsqllite.db.base;
+package com.pandora.handroidsqllite.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -34,7 +34,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
      * 创建student的sql语句
      */
     private String CREATE_TABLE_STUDENT = "create table student(" +
-            "id integer primary key auto_increment," +
+            "id integer primary key," +
             "name varchar(20) not null," +
             "sex varchar(10) not null," +
             "age integer" +

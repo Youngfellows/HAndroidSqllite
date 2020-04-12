@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.pandora.handroidsqllite.MyApp;
-import com.pandora.handroidsqllite.db.base.DBOpenHelper;
-
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package com.pandora.handroidsqllite.db.base;
+package com.pandora.handroidsqllite.db.helper;
 
 import android.content.ContentValues;
 import android.database.Cursor;

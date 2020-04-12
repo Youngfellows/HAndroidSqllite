@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.pandora.handroidsqllite.R;
 import com.pandora.handroidsqllite.adapter.StudentAdapter;
 import com.pandora.handroidsqllite.bean.Student;
-import com.pandora.handroidsqllite.db.base.StudentDBHelper;
+import com.pandora.handroidsqllite.db.helper.StudentDBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
