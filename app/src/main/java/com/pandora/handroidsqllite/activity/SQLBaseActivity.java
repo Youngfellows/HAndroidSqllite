@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.pandora.handroidsqllite.R;
 import com.pandora.handroidsqllite.adapter.StudentAdapter;
 import com.pandora.handroidsqllite.bean.Student;
+import com.pandora.handroidsqllite.db.base.StudentDBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,8 @@ public class SQLBaseActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRvStudent.setLayoutManager(layoutManager);
         List<Student> students = queryAll();
-        mStudentAdapter = new StudentAdapter(students);
+        //mStudentAdapter = new StudentAdapter(students);
+        mStudentAdapter = new StudentAdapter();
         mRvStudent.setAdapter(mStudentAdapter);
     }
 
@@ -92,6 +94,15 @@ public class SQLBaseActivity extends AppCompatActivity {
      */
     public void onAddData(View view) {
         Log.d(TAG, "onAddData ");
+        String name = mEtName.getText().toString();
+        String sex = mEtSex.getText().toString();
+        int age = Integer.parseInt(mEtAge.getText().toString());
+        Student student = new Student(name, sex, age);
+        StudentDBHelper dbHelper = StudentDBHelper.getInstance();
+        dbHelper.insert(student);
+
+        List<Student> students = dbHelper.queryAll();
+        mStudentAdapter.update(students);
     }
 
     /**
@@ -101,6 +112,15 @@ public class SQLBaseActivity extends AppCompatActivity {
      */
     public void onUpdataData(View view) {
         Log.d(TAG, "onUpdataData ");
+        String name = mEtName.getText().toString();
+        String sex = mEtSex.getText().toString();
+        int age = Integer.parseInt(mEtAge.getText().toString());
+        Student student = new Student(name, sex, age);
+        StudentDBHelper dbHelper = StudentDBHelper.getInstance();
+        dbHelper.update(student);
+
+        List<Student> students = dbHelper.queryAll();
+        mStudentAdapter.update(students);
     }
 
     /**
@@ -110,6 +130,15 @@ public class SQLBaseActivity extends AppCompatActivity {
      */
     public void onDelData(View view) {
         Log.d(TAG, "onDelData ");
+        String name = mEtName.getText().toString();
+        String sex = mEtSex.getText().toString();
+        int age = Integer.parseInt(mEtAge.getText().toString());
+        Student student = new Student(name, sex, age);
+        StudentDBHelper dbHelper = StudentDBHelper.getInstance();
+        dbHelper.delete(student);
+
+        List<Student> students = dbHelper.queryAll();
+        mStudentAdapter.update(students);
     }
 
     /**
@@ -119,5 +148,8 @@ public class SQLBaseActivity extends AppCompatActivity {
      */
     public void onQueryData(View view) {
         Log.d(TAG, "onQueryData  ");
+        StudentDBHelper dbHelper = StudentDBHelper.getInstance();
+        List<Student> students = dbHelper.queryAll();
+        mStudentAdapter.update(students);
     }
 }

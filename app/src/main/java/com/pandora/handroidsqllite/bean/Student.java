@@ -24,6 +24,10 @@ public class Student {
         this.age = age;
     }
 
+    public Student() {
+
+    }
+
     public String getName() {
         return name;
     }

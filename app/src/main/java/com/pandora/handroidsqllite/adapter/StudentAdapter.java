@@ -24,6 +24,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
      */
     private OnItemClickListener mOnItemClickListener;
 
+    public StudentAdapter() {
+
+    }
+
     public StudentAdapter(List<Student> students) {
         this.mStudents = students;
     }
@@ -33,7 +37,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
      *
      * @param data
      */
-    public void update(ArrayList<Student> data) {
+    public void update(List<Student> data) {
         this.mStudents = data;
         notifyDataSetChanged();
     }
