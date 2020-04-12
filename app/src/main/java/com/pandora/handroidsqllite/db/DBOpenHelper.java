@@ -32,9 +32,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     /**
      * 创建student的sql语句
+     * _id integer NOT NULL PRIMARY KEY AUTOINCREMENT
      */
     private String CREATE_TABLE_STUDENT = "create table student(" +
-            "id integer primary key," +
+            "_id integer primary key autoincrement," +
             "name varchar(20) not null," +
             "sex varchar(10) not null," +
             "age integer" +
