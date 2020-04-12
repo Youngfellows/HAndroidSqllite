@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.pandora.handroidsqllite.R;
 import com.pandora.handroidsqllite.adapter.StudentAdapter;
+import com.pandora.handroidsqllite.base.PermissionsActivity;
 import com.pandora.handroidsqllite.bean.Student;
 import com.pandora.handroidsqllite.db.helper.StudentDBHelper;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SQLBaseActivity extends AppCompatActivity {
+public class SQLBaseActivity extends PermissionsActivity {
 
     private String TAG = this.getClass().getSimpleName();
     private EditText mEtName;
@@ -50,6 +51,11 @@ public class SQLBaseActivity extends AppCompatActivity {
         //mStudentAdapter = new StudentAdapter(students);
         mStudentAdapter = new StudentAdapter();
         mRvStudent.setAdapter(mStudentAdapter);
+
+        Log.d(TAG, "initData ");
+        String dbPath = StudentDBHelper.getInstance().getDatabasePath();
+        Toast.makeText(SQLBaseActivity.this, dbPath, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "initData : dbPath = " + dbPath);
     }
 
     private void initEvent() {
@@ -154,5 +160,10 @@ public class SQLBaseActivity extends AppCompatActivity {
         StudentDBHelper dbHelper = StudentDBHelper.getInstance();
         List<Student> students = dbHelper.queryAll();
         mStudentAdapter.update(students);
+    }
+
+    @Override
+    public void onPermissionsFull() {
+        Log.d(TAG, "onPermissionsFull ");
     }
 }

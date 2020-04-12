@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.pandora.handroidsqllite.MyApp;
+import com.pandora.handroidsqllite.base.DataBaseContext;
 
 import java.util.List;
 
@@ -24,7 +25,8 @@ public abstract class DBHelper<T> {
      */
     protected SQLiteDatabase getDatebase() {
         if (mDbOpenHelper == null) {
-            mDbOpenHelper = new DBOpenHelper(MyApp.getContext());
+            //mDbOpenHelper = new DBOpenHelper(MyApp.getContext());
+            mDbOpenHelper = new DBOpenHelper(new DataBaseContext(MyApp.getContext()));
         }
         SQLiteDatabase db = mDbOpenHelper.getInstance();
         return db;
@@ -66,7 +68,8 @@ public abstract class DBHelper<T> {
      */
     public String getDatabasePath() {
         if (mDbOpenHelper == null) {
-            mDbOpenHelper = new DBOpenHelper(MyApp.getContext());
+            //mDbOpenHelper = new DBOpenHelper(MyApp.getContext());
+            mDbOpenHelper = new DBOpenHelper(new DataBaseContext(MyApp.getContext()));
         }
         return mDbOpenHelper.getDBPath();
     }

@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.pandora.handroidsqllite.base.DataBaseContext;
+
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
@@ -13,7 +15,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     /**
      * 上下文
      */
-    private Context mContext;
+    //private Context mContext;
+    private DataBaseContext mContext;
 
     /**
      * 数据库名称
@@ -43,7 +46,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     public DBOpenHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
-        this.mContext = context;
+        //this.mContext = context;
+        this.mContext = (DataBaseContext) context;
     }
 
     public SQLiteDatabase getInstance() {
