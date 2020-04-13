@@ -4,11 +4,6 @@ package com.pandora.handroidsqllite.bean;
 public class Driver {
 
     /**
-     * ID号
-     */
-    private long id;
-
-    /**
      * 编号
      */
     private String serialNumber;
@@ -52,8 +47,7 @@ public class Driver {
 
     }
 
-    public Driver(long id, String serialNumber, String name, String idCard, String birthday, String drivingLicence, String phoneNumber, String contactAddress, String address) {
-        this.id = id;
+    public Driver(String serialNumber, String name, String idCard, String birthday, String drivingLicence, String phoneNumber, String contactAddress, String address) {
         this.serialNumber = serialNumber;
         this.name = name;
         this.idCard = idCard;
@@ -62,14 +56,6 @@ public class Driver {
         this.phoneNumber = phoneNumber;
         this.contactAddress = contactAddress;
         this.address = address;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getSerialNumber() {
@@ -139,8 +125,7 @@ public class Driver {
     @Override
     public String toString() {
         return "Driver{" +
-                "id=" + id +
-                ", serialNumber='" + serialNumber + '\'' +
+                "serialNumber='" + serialNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", idCard='" + idCard + '\'' +
                 ", birthday='" + birthday + '\'' +

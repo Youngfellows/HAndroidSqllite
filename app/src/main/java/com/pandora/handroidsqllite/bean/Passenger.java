@@ -4,11 +4,6 @@ package com.pandora.handroidsqllite.bean;
 public class Passenger {
 
     /**
-     * ID号
-     */
-    private long id;
-
-    /**
      * 编号
      */
     private String serialNumber;
@@ -37,21 +32,12 @@ public class Passenger {
 
     }
 
-    public Passenger(long id, String serialNumber, String name, String nickName, String birthday, String phoneNumber) {
-        this.id = id;
+    public Passenger(String serialNumber, String name, String nickName, String birthday, String phoneNumber) {
         this.serialNumber = serialNumber;
         this.name = name;
         this.nickName = nickName;
         this.birthday = birthday;
         this.phoneNumber = phoneNumber;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getSerialNumber() {
@@ -97,8 +83,7 @@ public class Passenger {
     @Override
     public String toString() {
         return "Passenger{" +
-                "id=" + id +
-                ", serialNumber='" + serialNumber + '\'' +
+                "serialNumber='" + serialNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", birthday='" + birthday + '\'' +

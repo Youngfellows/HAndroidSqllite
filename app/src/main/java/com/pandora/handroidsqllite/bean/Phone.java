@@ -4,11 +4,6 @@ package com.pandora.handroidsqllite.bean;
 public class Phone {
 
     /**
-     * ID号
-     */
-    private long id;
-
-    /**
      * 品牌
      */
     private String brand;
@@ -37,22 +32,12 @@ public class Phone {
 
     }
 
-    public Phone(long id, String brand, String androidId, String imei, String serialNumber, String mac) {
-        this.id = id;
+    public Phone(String brand, String androidId, String imei, String serialNumber, String mac) {
         this.brand = brand;
         this.androidId = androidId;
         this.imei = imei;
         this.serialNumber = serialNumber;
         this.mac = mac;
-    }
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getBrand() {
@@ -95,12 +80,10 @@ public class Phone {
         this.mac = mac;
     }
 
-
     @Override
     public String toString() {
         return "Phone{" +
-                "id=" + id +
-                ", brand='" + brand + '\'' +
+                "brand='" + brand + '\'' +
                 ", androidId='" + androidId + '\'' +
                 ", imei='" + imei + '\'' +
                 ", serialNumber='" + serialNumber + '\'' +

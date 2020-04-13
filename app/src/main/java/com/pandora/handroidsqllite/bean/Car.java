@@ -4,11 +4,6 @@ package com.pandora.handroidsqllite.bean;
 public class Car {
 
     /**
-     * ID号
-     */
-    private long id;
-
-    /**
      * 车辆编号
      */
     private String carNumber;
@@ -38,21 +33,12 @@ public class Car {
 
     }
 
-    public Car(long id, String carNumber, String vin, String plateNumber, String brand, String colour) {
-        this.id = id;
+    public Car(String carNumber, String vin, String plateNumber, String brand, String colour) {
         this.carNumber = carNumber;
         this.vin = vin;
         this.plateNumber = plateNumber;
         this.brand = brand;
         this.colour = colour;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getCarNumber() {
@@ -98,8 +84,7 @@ public class Car {
     @Override
     public String toString() {
         return "Car{" +
-                "id=" + id +
-                ", carNumber='" + carNumber + '\'' +
+                "carNumber='" + carNumber + '\'' +
                 ", vin='" + vin + '\'' +
                 ", plateNumber='" + plateNumber + '\'' +
                 ", brand='" + brand + '\'' +

@@ -26,6 +26,19 @@
             android:text="杨过"/>
 
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCopyDB"
+            android:text="拷贝数据库"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onQueryPoi"
+            android:text="查询POI位置"/>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -44,6 +57,18 @@
             android:layout_height="wrap_content"
             android:hint="请输入性别"
             android:text="男"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onInsertCar"
+            android:text="插入car表"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onInsertPhone"
+            android:text="插入phone表"/>
 
     </LinearLayout>
 
@@ -66,17 +91,18 @@
             android:inputType="number"
             android:text="23"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCopyDB"
-            android:text="拷贝数据库"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onQueryPoi"
-            android:text="查询POI位置"/>
+            android:onClick="onInsertDriver"
+            android:text="插入司机表"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onInsertPassenger"
+            android:text="插入乘客表"/>
 
     </LinearLayout>
 
