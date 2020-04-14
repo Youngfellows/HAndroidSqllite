@@ -10,18 +10,24 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.pandora.handroidsqllite.MyApp;
 import com.pandora.handroidsqllite.R;
 import com.pandora.handroidsqllite.adapter.StudentAdapter;
 import com.pandora.handroidsqllite.base.PermissionsActivity;
 import com.pandora.handroidsqllite.bean.Car;
+import com.pandora.handroidsqllite.bean.Driver;
+import com.pandora.handroidsqllite.bean.Passenger;
 import com.pandora.handroidsqllite.bean.Phone;
 import com.pandora.handroidsqllite.bean.Poi;
 import com.pandora.handroidsqllite.bean.Student;
 import com.pandora.handroidsqllite.db.DBManager;
 import com.pandora.handroidsqllite.db.helper.CarDBHelper;
+import com.pandora.handroidsqllite.db.helper.DriverDBHelper;
+import com.pandora.handroidsqllite.db.helper.PassengerDBHelper;
 import com.pandora.handroidsqllite.db.helper.PhoneDBHelper;
 import com.pandora.handroidsqllite.db.helper.PoiDBHelper;
 import com.pandora.handroidsqllite.db.helper.StudentDBHelper;
+import com.pandora.handroidsqllite.parser.JSONParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -247,7 +253,25 @@ public class SQLBaseActivity extends PermissionsActivity {
      * @param view
      */
     public void onInsertCar(View view) {
-        new Thread(insertCarTask).start();
+        Log.d(TAG, "onInsertCar ");
+        String carNumber = "RC00000";  //车辆编号
+        String vin = "RUXLROBOTL000000"; // 车架号
+        String plateNumber = "RA000"; //车牌号
+        String brand = "Benz"; //品牌
+        String colour = "黑色"; //车颜色
+
+        JSONParser.getInstance(MyApp.getContext()).carParser(new JSONParser.JSONParseListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "onSuccess: ");
+                new Thread(insertCarTask).start();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
     }
 
     /**
@@ -257,7 +281,24 @@ public class SQLBaseActivity extends PermissionsActivity {
      */
     public void onInsertPhone(View view) {
         Log.d(TAG, "onInsertPhone ");
-        new Thread(insertPhoneTask).start();
+        String brand = "OPPO";//品牌
+        String androidId = "0005cb85e8ee4415";//Android ID
+        String imei = "353384097181144";//imei
+        String serialNumber = "DRGGAM2872110891"; //序列号
+        String mac = "20:39:56:8a:0f:47"; //MAC地址
+
+        JSONParser.getInstance(MyApp.getContext()).phoneParser(new JSONParser.JSONParseListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "onSuccess: ");
+                new Thread(insertPhoneTask).start();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
     }
 
     /**
@@ -275,6 +316,19 @@ public class SQLBaseActivity extends PermissionsActivity {
         String phoneNumber = ""; //电话号码
         String contactAddress = ""; //联络地址
         String address = ""; //户籍地址
+
+        JSONParser.getInstance(MyApp.getContext()).driverParser(new JSONParser.JSONParseListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "onSuccess: ");
+                new Thread(showDriverTask).start();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.d(TAG, "onFailure: ");
+            }
+        });
     }
 
     /**
@@ -290,23 +344,77 @@ public class SQLBaseActivity extends PermissionsActivity {
         String nickName = "";//昵称
         String birthday = "";//生日
         String phoneNumber = "";//电话号码
+
+        JSONParser.getInstance(MyApp.getContext()).passengerParser(new JSONParser.JSONParseListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "onSuccess: ");
+                new Thread(showPassengerTask).start();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.d(TAG, "onFailure: ");
+            }
+        });
     }
+
+    private Runnable showPassengerTask = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "showPassengerTask run: ");
+            List<Student> students = new ArrayList<>();
+            List<Passenger> passengers = PassengerDBHelper.getInstance().queryAll();
+            int size = passengers.size();
+            for (int i = 0; i < size; i++) {
+                Passenger passenger = passengers.get(i);
+                String passenger_str = passenger.toString();
+                //测试使用
+                Student student = new Student();
+                student.setName(passenger_str);
+                students.add(student);
+            }
+
+            //更新UI
+            mMainHandler.post(new ShowPoiTask(students));
+        }
+    };
+
+    private Runnable showDriverTask = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "showPassengerTask run: insert driver table success ");
+            List<Student> students = new ArrayList<>();
+            List<Driver> drivers = DriverDBHelper.getInstance().queryAll();
+            int size = drivers.size();
+            for (int i = 0; i < size; i++) {
+                Driver driver = drivers.get(i);
+                String driver_str = driver.toString();
+                //测试使用
+                Student student = new Student();
+                student.setName(driver_str);
+                students.add(student);
+            }
+
+            //更新UI
+            mMainHandler.post(new ShowPoiTask(students));
+        }
+    };
 
     private Runnable insertCarTask = new Runnable() {
         @Override
         public void run() {
-            Log.d(TAG, "onInsertCar ");
-            String carNumber = "RC00000";  //车辆编号
-            String vin = "RUXLROBOTL000000"; // 车架号
-            String plateNumber = "RA000"; //车牌号
-            String brand = "Benz"; //品牌
-            String colour = "黑色"; //车颜色
-            for (int i = 0; i < 100; i++) {
-                Car car = new Car(carNumber + i, vin + i, plateNumber + i, brand, colour);
-                CarDBHelper.getInstance().insert(car);
-            }
-
-            Log.d(TAG, "run insert car table success ... ");
+//            Log.d(TAG, "onInsertCar ");
+//            String carNumber = "RC00000";  //车辆编号
+//            String vin = "RUXLROBOTL000000"; // 车架号
+//            String plateNumber = "RA000"; //车牌号
+//            String brand = "Benz"; //品牌
+//            String colour = "黑色"; //车颜色
+//            for (int i = 0; i < 100; i++) {
+//                Car car = new Car(carNumber + i, vin + i, plateNumber + i, brand, colour);
+//                CarDBHelper.getInstance().insert(car);
+//            }
+            Log.d(TAG, "insertCarTask run insert car table success ... ");
             List<Student> students = new ArrayList<>();
             List<Car> carList = CarDBHelper.getInstance().queryAll();
             int size = carList.size();
@@ -330,19 +438,18 @@ public class SQLBaseActivity extends PermissionsActivity {
     private Runnable insertPhoneTask = new Runnable() {
         @Override
         public void run() {
-            Log.d(TAG, "insertPhoneTask run ... ");
-            String brand = "OPPO";//品牌
-            String androidId = "0005cb85e8ee4415";//Android ID
-            String imei = "353384097181144";//imei
-            String serialNumber = "DRGGAM2872110891"; //序列号
-            String mac = "20:39:56:8a:0f:47"; //MAC地址
+//            String brand = "OPPO";//品牌
+//            String androidId = "0005cb85e8ee4415";//Android ID
+//            String imei = "353384097181144";//imei
+//            String serialNumber = "DRGGAM2872110891"; //序列号
+//            String mac = "20:39:56:8a:0f:47"; //MAC地址
+//
+//            for (int i = 0; i < 100; i++) {
+//                Phone phone = new Phone(brand + i, androidId + i, imei + i, serialNumber + i, mac + i);
+//                PhoneDBHelper.getInstance().insert(phone);
+//            }
 
-            for (int i = 0; i < 100; i++) {
-                Phone phone = new Phone(brand + i, androidId + i, imei + i, serialNumber + i, mac + i);
-                PhoneDBHelper.getInstance().insert(phone);
-            }
-
-            Log.d(TAG, "run insert car table success ... ");
+            Log.d(TAG, "insertPhoneTask run insert car table success ... ");
             List<Student> students = new ArrayList<>();
             List<Phone> phoneList = PhoneDBHelper.getInstance().queryAll();
             int size = phoneList.size();

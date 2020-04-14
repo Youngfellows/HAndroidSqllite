@@ -47,15 +47,14 @@ public class PoiDBHelper extends DBHelper<Poi> {
         Cursor cursor = db.rawQuery("select * from POI_DATA", null);
         while (cursor.moveToNext()) {
             int name_index = cursor.getColumnIndex("NAME");
-            int uid_index = cursor.getColumnIndex("UID");
             int address_index = cursor.getColumnIndex("ADDRESS");
             int city_index = cursor.getColumnIndex("CITY");
             int district_index = cursor.getColumnIndex("DISTRICT");
             int latitude_index = cursor.getColumnIndex("LATITUDE");
             int longitude_index = cursor.getColumnIndex("LONGITUDE");
             int category_index = cursor.getColumnIndex("CATEGORY");
+
             String name = cursor.getString(name_index);
-            String uid = cursor.getString(uid_index);
             String address = cursor.getString(address_index);
             String city = cursor.getString(city_index);
             String district = cursor.getString(district_index);
@@ -63,7 +62,7 @@ public class PoiDBHelper extends DBHelper<Poi> {
             double longitude = cursor.getDouble(longitude_index);
             String category = cursor.getString(category_index);
 
-            Poi poi = new Poi(name, uid, address, city, district, latitude, longitude, category);
+            Poi poi = new Poi(name, address, city, district, latitude, longitude, category);
             list.add(poi);
         }
         cursor.close();

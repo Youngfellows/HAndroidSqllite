@@ -1,0 +1,55 @@
+<?xml version="1_0" encoding="utf-8"?>
+<resources>
+    <command cmd="car_open_bluetooth">
+        <string name="open__bluetooth_1">打开蓝牙</string>
+        <string name="open__bluetooth_2">开启蓝牙</string>
+        <string name="open__bluetooth_3">怎么配对手机</string>
+        <string name="open__bluetooth_3">请问怎么配对手机</string>
+    </command>
+    <command cmd="car_close_bluetooth">
+        <string name="close__bluetooth">关闭蓝牙</string>
+    </command>
+    <command cmd="car_open_wifi">
+        <string name="open__wifi_1">打开wifi</string>
+        <string name="open__wifi_2">开启wifi</string>
+        <string name="open__wifi_3">打开无线网络</string>
+        <string name="open__wifi_4">开启无线网络</string>
+    </command>
+    <command cmd="car_close_wifi">
+        <string name="close__wifi_1">关闭wifi</string>
+        <string name="close__wifi_2">关闭无线网络</string>
+    </command>
+    <command cmd="car_power_on">
+        <string name="item">打开屏幕</string>
+        <string name="item">解锁屏幕</string>
+    </command>
+    <command cmd="car_power_off">
+        <string name="item">关闭屏幕</string>
+        <string name="item">锁定屏幕</string>
+    </command>
+    <command cmd="AIRLEFTADJUST" from="1" to="15">
+        <string name="item1">设置主驾驶空调温度为%度</string>
+        <string name="item2">设置主驾驶空调温度到%度</string>
+        <string name="item3">主驾驶空调温度设置为%度</string>
+        <string name="item4">主驾驶空调温度设置到%度</string>
+        <string name="item5">左温区温度调到%度</string>
+        <string name="item6">左温区温度设为%度</string>
+        <string name="item7">左温区温度增加到%度</string>
+        <string name="item8">左温区温度升高到%度</string>
+        <string name="item9">左温区温度升到%度</string>
+        <string name="item10">左温区温度减少到%度</string>
+        <string name="item11">左温区温度降到%度</string>
+        <string name="item12">左温区温度降低到%度</string>
+    </command>
+    <command cmd="SEATLEFTHEATINGADJUST" from="1" to="15">
+        <string name="item1">主驾驶座椅加热调高到%档</string>
+        <string name="item2">主驾驶座椅加热调到%档</string>
+        <string name="item3">主驾驶座椅加热调低到%档</string>
+        <string name="item4">主驾驶座椅加热设为%档</string>
+        <string name="item5">主驾驶座椅制热调高到%档</string>
+        <string name="item6">主驾驶座椅制热调到%档</string>
+        <string name="item7">主驾驶座椅制热调低到%档</string>
+        <string name="item8">主驾驶座椅制热设为%档</string>
+    </command>
+
+</resources>

@@ -26,13 +26,13 @@ public class DBManager {
     /**
      * assets文件夹下数据库文件名
      */
-    private static final String ASSETS_DB_NAME = "poi_dat.db";
+    private static final String ASSETS_DB_NAME = "poi_data.db";
 
     /**
      * 复制数据库相关
      * 复制到手机中的数据库文件名
      */
-    private final String CREAGTE_DB_NAME = "poi_dat.db";
+    private final String CREAGTE_DB_NAME = "poi_data.db";
 
 
     private String DATABASES = "databases";

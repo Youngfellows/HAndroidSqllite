@@ -11,10 +11,6 @@ public class Poi {
      */
     private String name;
 
-    /**
-     * 用户UID
-     */
-    private String uid;
 
     /**
      * 地址
@@ -50,9 +46,8 @@ public class Poi {
 
     }
 
-    public Poi(String name, String uid, String address, String city, String district, double latitude, double longitude, String category) {
+    public Poi(String name, String address, String city, String district, double latitude, double longitude, String category) {
         this.name = name;
-        this.uid = uid;
         this.address = address;
         this.city = city;
         this.district = district;
@@ -68,14 +63,6 @@ public class Poi {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
     }
 
     public String getAddress() {
@@ -130,7 +117,6 @@ public class Poi {
     public String toString() {
         return "Poi{" +
                 "name='" + name + '\'' +
-                ", uid='" + uid + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", district='" + district + '\'' +
