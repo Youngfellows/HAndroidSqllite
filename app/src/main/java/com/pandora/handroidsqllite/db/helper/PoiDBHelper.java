@@ -4,14 +4,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.pandora.handroidsqllite.bean.Driver;
 import com.pandora.handroidsqllite.bean.Poi;
 import com.pandora.handroidsqllite.db.DBHelper;
 import com.pandora.handroidsqllite.db.DBManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * 操作POI数据库
@@ -38,7 +36,8 @@ public class PoiDBHelper extends DBHelper<Poi> {
     @Override
     public Poi query() {
         SQLiteDatabase db = mDb;
-        String queryRandomSql = "select * from poi_data order by RANDOM() desc limit 1;";
+        //String queryRandomSql = "select * from poi_data order by RANDOM() desc limit 1;";
+        String queryRandomSql = "select * from poi_data where name = (select name from poi_data order by RANDOM() limit 10);";
         Log.d(TAG, "query: random query sql: " + queryRandomSql);
         Cursor cursor = db.rawQuery(queryRandomSql, null);
         Poi poi = null;

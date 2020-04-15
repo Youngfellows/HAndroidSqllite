@@ -9,7 +9,6 @@ import com.pandora.handroidsqllite.db.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * phone表操作
@@ -31,7 +30,8 @@ public class PhoneDBHelper extends DBHelper<Phone> {
     @Override
     public Phone query() {
         SQLiteDatabase db = getDatebase();
-        String queryRandomSql = "select * from phone order by RANDOM() desc limit 1;";
+        //String queryRandomSql = "select * from phone order by RANDOM() desc limit 1;";
+        String queryRandomSql = "select * from phone where imei = (select imei from phone order by RANDOM() limit 10);";
         Log.d(TAG, "query: random query sql: " + queryRandomSql);
         Cursor cursor = db.rawQuery(queryRandomSql, null);
         Phone phone = null;

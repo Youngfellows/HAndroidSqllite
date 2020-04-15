@@ -9,7 +9,6 @@ import com.pandora.handroidsqllite.db.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * car表操作
@@ -31,7 +30,8 @@ public class CarDBHelper extends DBHelper<Car> {
     @Override
     public Car query() {
         SQLiteDatabase db = getDatebase();
-        String queryRandomSql = "select * from car order by RANDOM() desc limit 1;";
+        //String queryRandomSql = "select * from car order by RANDOM() desc limit 1;";
+        String queryRandomSql = "select * from car where vin = (select vin from car order by RANDOM() limit 10);";
         Cursor cursor = db.rawQuery(queryRandomSql, null);
         Log.d(TAG, "query: random query sql: " + queryRandomSql);
         Car car = null;

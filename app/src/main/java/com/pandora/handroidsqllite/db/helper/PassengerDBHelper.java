@@ -4,13 +4,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.pandora.handroidsqllite.bean.Driver;
 import com.pandora.handroidsqllite.bean.Passenger;
 import com.pandora.handroidsqllite.db.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 /**
@@ -33,7 +31,8 @@ public class PassengerDBHelper extends DBHelper<Passenger> {
     @Override
     public Passenger query() {
         SQLiteDatabase db = getDatebase();
-        String queryRandomSql = "select * from passenger order by RANDOM() desc limit 1;";
+        //String queryRandomSql = "select * from passenger order by RANDOM() desc limit 1;";
+        String queryRandomSql = "select * from passenger where phoneNumber = (select phoneNumber from passenger order by RANDOM() limit 10);";
         Log.d(TAG, "query: random query sql: " + queryRandomSql);
         Cursor cursor = db.rawQuery(queryRandomSql, null);
         Passenger passenger = null;
