@@ -30,27 +30,10 @@ public class PhoneDBHelper extends DBHelper<Phone> {
 
     @Override
     public Phone query() {
-        String queryIdSql = "select min(_id) min,max(_id) max from phone;";
         SQLiteDatabase db = getDatebase();
-        Cursor cursor = db.rawQuery(queryIdSql, null);
-        int randomId = 0;
-        int min = 0;
-        int max = 0;
-        while (cursor.moveToNext()) {
-            int min_index = cursor.getColumnIndex("min");
-            int max_index = cursor.getColumnIndex("max");
-            min = cursor.getInt(min_index);
-            max = cursor.getInt(max_index);
-
-        }
-        randomId = new Random().nextInt(max);
-        Log.d(TAG, "query: min: " + min + " ,max: " + max + " ,randomId: " + randomId);
-        if (randomId < min) {
-            randomId = min;
-        }
-        String queryRandomSql = "select * from phone where _id='" + randomId + "';";
+        String queryRandomSql = "select * from phone order by RANDOM() desc limit 1;";
         Log.d(TAG, "query: random query sql: " + queryRandomSql);
-        cursor = db.rawQuery(queryRandomSql, null);
+        Cursor cursor = db.rawQuery(queryRandomSql, null);
         Phone phone = null;
         while (cursor.moveToNext()) {
             int brand_index = cursor.getColumnIndex("brand");

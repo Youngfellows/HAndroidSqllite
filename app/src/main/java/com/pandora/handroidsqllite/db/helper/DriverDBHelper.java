@@ -31,27 +31,10 @@ public class DriverDBHelper extends DBHelper<Driver> {
 
     @Override
     public Driver query() {
-        String queryIdSql = "select min(_id) min,max(_id) max from driver;";
         SQLiteDatabase db = getDatebase();
-        Cursor cursor = db.rawQuery(queryIdSql, null);
-        int randomId = 0;
-        int min = 0;
-        int max = 0;
-        while (cursor.moveToNext()) {
-            int min_index = cursor.getColumnIndex("min");
-            int max_index = cursor.getColumnIndex("max");
-            min = cursor.getInt(min_index);
-            max = cursor.getInt(max_index);
-
-        }
-        randomId = new Random().nextInt(max);
-        Log.d(TAG, "query: min: " + min + " ,max: " + max + " ,randomId: " + randomId);
-        if (randomId < min) {
-            randomId = min;
-        }
-        String queryRandomSql = "select * from driver where _id='" + randomId + "';";
+        String queryRandomSql = "select * from driver order by RANDOM() desc limit 1;";
         Log.d(TAG, "query: random query sql: " + queryRandomSql);
-        cursor = db.rawQuery(queryRandomSql, null);
+        Cursor cursor = db.rawQuery(queryRandomSql, null);
         Driver driver = null;
         while (cursor.moveToNext()) {
             int serialNumber_index = cursor.getColumnIndex("serialNumber");
