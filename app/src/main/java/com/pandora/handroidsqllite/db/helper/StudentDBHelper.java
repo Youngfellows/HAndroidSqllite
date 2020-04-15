@@ -29,6 +29,11 @@ public class StudentDBHelper extends DBHelper<Student> {
     }
 
     @Override
+    public Student query() {
+        return null;
+    }
+
+    @Override
     public List<Student> queryAll() {
         // 1.使用java提供的sql查询
         List<Student> list = new ArrayList<>();

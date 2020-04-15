@@ -9,6 +9,7 @@ import com.pandora.handroidsqllite.db.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * car表操作
@@ -25,6 +26,49 @@ public class CarDBHelper extends DBHelper<Car> {
 
     public static CarDBHelper getInstance() {
         return CarDBHelper.Holder.INSTANCE;
+    }
+
+    @Override
+    public Car query() {
+        String queryIdSql = "select min(_id) min,max(_id) max from car;";
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(queryIdSql, null);
+        int randomId = 0;
+        int min = 0;
+        int max = 0;
+        while (cursor.moveToNext()) {
+            int min_index = cursor.getColumnIndex("min");
+            int max_index = cursor.getColumnIndex("max");
+            min = cursor.getInt(min_index);
+            max = cursor.getInt(max_index);
+
+        }
+        randomId = new Random().nextInt(max);
+        Log.d(TAG, "query: min: " + min + " ,max: " + max + " ,randomId: " + randomId);
+        if (randomId < min) {
+            randomId = min;
+        }
+        String queryRandomSql = "select * from car where _id='" + randomId + "';";
+        Log.d(TAG, "query: random query sql: " + queryRandomSql);
+        cursor = db.rawQuery(queryRandomSql, null);
+        Car car = null;
+        while (cursor.moveToNext()) {
+            int carNumber_index = cursor.getColumnIndex("carNumber");
+            int vin_index = cursor.getColumnIndex("vin");
+            int plateNumber_index = cursor.getColumnIndex("plateNumber");
+            int brand_index = cursor.getColumnIndex("brand");
+            int colour_index = cursor.getColumnIndex("colour");
+
+            String carNumber = cursor.getString(carNumber_index);
+            String vin = cursor.getString(vin_index);
+            String plateNumber = cursor.getString(plateNumber_index);
+            String brand = cursor.getString(brand_index);
+            String colour = cursor.getString(colour_index);
+
+            car = new Car(carNumber, vin, plateNumber, brand, colour);
+        }
+        cursor.close();
+        return car;
     }
 
     @Override

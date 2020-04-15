@@ -404,16 +404,16 @@ public class SQLBaseActivity extends PermissionsActivity {
     private Runnable insertCarTask = new Runnable() {
         @Override
         public void run() {
-//            Log.d(TAG, "onInsertCar ");
-//            String carNumber = "RC00000";  //车辆编号
-//            String vin = "RUXLROBOTL000000"; // 车架号
-//            String plateNumber = "RA000"; //车牌号
-//            String brand = "Benz"; //品牌
-//            String colour = "黑色"; //车颜色
-//            for (int i = 0; i < 100; i++) {
-//                Car car = new Car(carNumber + i, vin + i, plateNumber + i, brand, colour);
-//                CarDBHelper.getInstance().insert(car);
-//            }
+            //            Log.d(TAG, "onInsertCar ");
+            //            String carNumber = "RC00000";  //车辆编号
+            //            String vin = "RUXLROBOTL000000"; // 车架号
+            //            String plateNumber = "RA000"; //车牌号
+            //            String brand = "Benz"; //品牌
+            //            String colour = "黑色"; //车颜色
+            //            for (int i = 0; i < 100; i++) {
+            //                Car car = new Car(carNumber + i, vin + i, plateNumber + i, brand, colour);
+            //                CarDBHelper.getInstance().insert(car);
+            //            }
             Log.d(TAG, "insertCarTask run insert car table success ... ");
             List<Student> students = new ArrayList<>();
             List<Car> carList = CarDBHelper.getInstance().queryAll();
@@ -438,16 +438,16 @@ public class SQLBaseActivity extends PermissionsActivity {
     private Runnable insertPhoneTask = new Runnable() {
         @Override
         public void run() {
-//            String brand = "OPPO";//品牌
-//            String androidId = "0005cb85e8ee4415";//Android ID
-//            String imei = "353384097181144";//imei
-//            String serialNumber = "DRGGAM2872110891"; //序列号
-//            String mac = "20:39:56:8a:0f:47"; //MAC地址
-//
-//            for (int i = 0; i < 100; i++) {
-//                Phone phone = new Phone(brand + i, androidId + i, imei + i, serialNumber + i, mac + i);
-//                PhoneDBHelper.getInstance().insert(phone);
-//            }
+            //            String brand = "OPPO";//品牌
+            //            String androidId = "0005cb85e8ee4415";//Android ID
+            //            String imei = "353384097181144";//imei
+            //            String serialNumber = "DRGGAM2872110891"; //序列号
+            //            String mac = "20:39:56:8a:0f:47"; //MAC地址
+            //
+            //            for (int i = 0; i < 100; i++) {
+            //                Phone phone = new Phone(brand + i, androidId + i, imei + i, serialNumber + i, mac + i);
+            //                PhoneDBHelper.getInstance().insert(phone);
+            //            }
 
             Log.d(TAG, "insertPhoneTask run insert car table success ... ");
             List<Student> students = new ArrayList<>();
@@ -463,6 +463,117 @@ public class SQLBaseActivity extends PermissionsActivity {
                 students.add(student);
             }
 
+            //更新UI
+            mMainHandler.post(new ShowPoiTask(students));
+        }
+    };
+
+    /**
+     * 查询司机
+     *
+     * @param view
+     */
+    public void onRandomDriver(View view) {
+        new Thread(mRandomQueryDriverTask).start();
+    }
+
+    private Runnable mRandomQueryDriverTask = new Runnable() {
+        @Override
+        public void run() {
+            Driver driver = DriverDBHelper.getInstance().query();
+
+            String driver_str = driver.toString();
+            Log.d(TAG, "run: query driver: " + driver_str);
+            List<Student> students = new ArrayList<>();
+
+            //测试使用
+            Student student = new Student();
+            student.setName(driver_str);
+            students.add(student);
+            //更新UI
+            mMainHandler.post(new ShowPoiTask(students));
+        }
+    };
+
+    /**
+     * 查询乘客
+     *
+     * @param view
+     */
+    public void onRandomPassenger(View view) {
+        new Thread(mRandomQueryPassengerTask).start();
+    }
+
+
+    private Runnable mRandomQueryPassengerTask = new Runnable() {
+        @Override
+        public void run() {
+            Passenger passenger = PassengerDBHelper.getInstance().query();
+
+            String passenger_str = passenger.toString();
+            Log.d(TAG, "run: query passenger: " + passenger_str);
+            List<Student> students = new ArrayList<>();
+
+            //测试使用
+            Student student = new Student();
+            student.setName(passenger_str);
+            students.add(student);
+            //更新UI
+            mMainHandler.post(new ShowPoiTask(students));
+        }
+    };
+
+    /**
+     * 查询车辆
+     *
+     * @param view
+     */
+    public void onRandomCar(View view) {
+        new Thread(mRandomQueryCarTask).start();
+    }
+
+
+    private Runnable mRandomQueryCarTask = new Runnable() {
+        @Override
+        public void run() {
+            Car car = CarDBHelper.getInstance().query();
+
+            String car_str = car.toString();
+            Log.d(TAG, "run: query car: " + car_str);
+            List<Student> students = new ArrayList<>();
+
+            //测试使用
+            Student student = new Student();
+            student.setName(car_str);
+            students.add(student);
+            //更新UI
+            mMainHandler.post(new ShowPoiTask(students));
+        }
+    };
+
+    /**
+     * 查询手机
+     *
+     * @param view
+     */
+    public void onRandomPhone(View view) {
+        new Thread(mRandomQueryPhoneTask).start();
+    }
+
+
+    private Runnable mRandomQueryPhoneTask = new Runnable() {
+        @Override
+        public void run() {
+            Phone phone = PhoneDBHelper.getInstance().query();
+
+            String phone_str = phone.toString();
+            Log.d(TAG, "run: query phone: " + phone_str);
+            List<Student> students = new ArrayList<>();
+
+            //测试使用
+            Student student = new Student();
+            student.setName(phone_str);
+            students.add(student);
             //更新UI
             mMainHandler.post(new ShowPoiTask(students));
         }

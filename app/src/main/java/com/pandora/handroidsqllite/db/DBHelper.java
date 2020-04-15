@@ -77,6 +77,11 @@ public abstract class DBHelper<T> {
     /**
      * 查询
      */
+    public abstract T query();
+
+    /**
+     * 查询全部
+     */
     public abstract List<T> queryAll();
 
     /**

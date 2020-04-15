@@ -9,6 +9,7 @@ import com.pandora.handroidsqllite.db.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * phone表操作
@@ -25,6 +26,49 @@ public class PhoneDBHelper extends DBHelper<Phone> {
 
     public static PhoneDBHelper getInstance() {
         return PhoneDBHelper.Holder.INSTANCE;
+    }
+
+    @Override
+    public Phone query() {
+        String queryIdSql = "select min(_id) min,max(_id) max from phone;";
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(queryIdSql, null);
+        int randomId = 0;
+        int min = 0;
+        int max = 0;
+        while (cursor.moveToNext()) {
+            int min_index = cursor.getColumnIndex("min");
+            int max_index = cursor.getColumnIndex("max");
+            min = cursor.getInt(min_index);
+            max = cursor.getInt(max_index);
+
+        }
+        randomId = new Random().nextInt(max);
+        Log.d(TAG, "query: min: " + min + " ,max: " + max + " ,randomId: " + randomId);
+        if (randomId < min) {
+            randomId = min;
+        }
+        String queryRandomSql = "select * from phone where _id='" + randomId + "';";
+        Log.d(TAG, "query: random query sql: " + queryRandomSql);
+        cursor = db.rawQuery(queryRandomSql, null);
+        Phone phone = null;
+        while (cursor.moveToNext()) {
+            int brand_index = cursor.getColumnIndex("brand");
+            int androidId_index = cursor.getColumnIndex("androidId");
+            int imei_index = cursor.getColumnIndex("imei");
+            int serialNumber_index = cursor.getColumnIndex("serialNumber");
+            int mac_index = cursor.getColumnIndex("mac");
+
+            String brand = cursor.getString(brand_index);
+            String androidId = cursor.getString(androidId_index);
+            String imei = cursor.getString(imei_index);
+            String serialNumber = cursor.getString(serialNumber_index);
+            String mac = cursor.getString(mac_index);
+
+            phone = new Phone(brand, androidId, imei, serialNumber, mac);
+        }
+        cursor.close();
+        return phone;
     }
 
     @Override
