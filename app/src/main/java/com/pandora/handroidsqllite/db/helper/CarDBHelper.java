@@ -81,6 +81,32 @@ public class CarDBHelper extends DBHelper<Car> {
     }
 
     @Override
+    public List<Car> limitQuery(long counts) {
+        String sql = "select * from car order by RANDOM() limit " + counts + ";";
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(sql, null);
+        List<Car> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            int carNumber_index = cursor.getColumnIndex("carNumber");
+            int vin_index = cursor.getColumnIndex("vin");
+            int plateNumber_index = cursor.getColumnIndex("plateNumber");
+            int brand_index = cursor.getColumnIndex("brand");
+            int colour_index = cursor.getColumnIndex("colour");
+
+            String carNumber = cursor.getString(carNumber_index);
+            String vin = cursor.getString(vin_index);
+            String plateNumber = cursor.getString(plateNumber_index);
+            String brand = cursor.getString(brand_index);
+            String colour = cursor.getString(colour_index);
+
+            Car car = new Car(carNumber, vin, plateNumber, brand, colour);
+            list.add(car);
+        }
+        cursor.close();
+        return list;
+    }
+
+    @Override
     public List<Car> queryAll() {
         // 1.使用java提供的sql查询
         List<Car> list = new ArrayList<>();

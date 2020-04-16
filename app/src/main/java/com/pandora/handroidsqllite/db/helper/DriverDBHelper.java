@@ -66,6 +66,41 @@ public class DriverDBHelper extends DBHelper<Driver> {
     }
 
     @Override
+    public List<Driver> limitQuery(long counts) {
+        String sql = "select * from driver order by RANDOM() limit " + counts + ";";
+        // 1.使用java提供的sql查询
+        List<Driver> list = new ArrayList<>();
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(sql, null);
+        Log.d(TAG, "limitQuery: sql = " + sql);
+        Log.d(TAG, "limitQuery: sql = " + sql);
+        while (cursor.moveToNext()) {
+            int serialNumber_index = cursor.getColumnIndex("serialNumber");
+            int name_index = cursor.getColumnIndex("name");
+            int idCard_index = cursor.getColumnIndex("idCard");
+            int birthday_index = cursor.getColumnIndex("birthday");
+            int drivingLicence_index = cursor.getColumnIndex("drivingLicence");
+            int phoneNumber_index = cursor.getColumnIndex("phoneNumber");
+            int contactAddress_index = cursor.getColumnIndex("contactAddress");
+            int address_index = cursor.getColumnIndex("address");
+
+            String serialNumber = cursor.getString(serialNumber_index);
+            String name = cursor.getString(name_index);
+            String idCard = cursor.getString(idCard_index);
+            String birthday = cursor.getString(birthday_index);
+            String drivingLicence = cursor.getString(drivingLicence_index);
+            String phoneNumber = cursor.getString(phoneNumber_index);
+            String contactAddress = cursor.getString(contactAddress_index);
+            String address = cursor.getString(address_index);
+
+            Driver driver = new Driver(serialNumber, name, idCard, birthday, drivingLicence, phoneNumber, contactAddress, address);
+            list.add(driver);
+        }
+        cursor.close();
+        return list;
+    }
+
+    @Override
     public List<Driver> queryAll() {
         // 1.使用java提供的sql查询
         List<Driver> list = new ArrayList<>();

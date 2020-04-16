@@ -469,6 +469,70 @@ public class SQLBaseActivity extends PermissionsActivity {
     };
 
     /**
+     * 随机查询多少条
+     *
+     * @param view
+     */
+    public void onLimitDriver(View view) {
+        new Thread(mDriverLimitQueryTask).start();
+    }
+
+    private Runnable mDriverLimitQueryTask = new Runnable() {
+        @Override
+        public void run() {
+            int limitCounts = 5;
+            Log.d(TAG, "insertPhoneTask run insert car table success ... ");
+            List<Student> students = new ArrayList<>();
+            List<Driver> driverList = DriverDBHelper.getInstance().limitQuery(limitCounts);
+            int size = driverList.size();
+            for (int i = 0; i < size; i++) {
+                Driver driver = driverList.get(i);
+                String driver_str = driver.toString();
+                Log.d(TAG, "insertPhoneTask: run , " + driver_str);
+                //测试使用
+                Student student = new Student();
+                student.setName(driver_str);
+                students.add(student);
+            }
+
+            //更新UI
+            mMainHandler.post(new ShowPoiTask(students));
+        }
+    };
+
+    /**
+     * 随机查询多少条
+     *
+     * @param view
+     */
+    public void onLimitPassenger(View view) {
+        new Thread(mPassengerLimitQueryTask).start();
+    }
+
+    private Runnable mPassengerLimitQueryTask = new Runnable() {
+        @Override
+        public void run() {
+            int limitCounts = 5;
+            Log.d(TAG, "insertPhoneTask run insert car table success ... ");
+            List<Student> students = new ArrayList<>();
+            List<Passenger> passengerList = PassengerDBHelper.getInstance().limitQuery(limitCounts);
+            int size = passengerList.size();
+            for (int i = 0; i < size; i++) {
+                Passenger passenger = passengerList.get(i);
+                String passenger_str = passenger.toString();
+                Log.d(TAG, "insertPhoneTask: run , " + passenger_str);
+                //测试使用
+                Student student = new Student();
+                student.setName(passenger_str);
+                students.add(student);
+            }
+
+            //更新UI
+            mMainHandler.post(new ShowPoiTask(students));
+        }
+    };
+
+    /**
      * 查询司机
      *
      * @param view

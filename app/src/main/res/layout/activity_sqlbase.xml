@@ -178,8 +178,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRandomCar2"
-            android:text="查询指定车辆外的一辆"/>
+            android:text="查询另外一辆"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onLimitDriver"
+            android:text="查几个司机"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onLimitPassenger"
+            android:text="查几个乘客"/>
 
     </LinearLayout>
 

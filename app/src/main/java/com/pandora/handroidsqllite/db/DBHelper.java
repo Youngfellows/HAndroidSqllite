@@ -53,7 +53,7 @@ public abstract class DBHelper<T> {
         while (cursor.moveToNext()) {
             //遍历出表名
             String name = cursor.getString(0);
-            Log.d(TAG, "isTableExist ");
+            Log.d(TAG, "isTableExist: name: " + name);
             if (name.equals(tableName)) {
                 return true;
             }
@@ -86,6 +86,14 @@ public abstract class DBHelper<T> {
      * @return
      */
     public abstract T besidesQuery(T t);
+
+    /**
+     * 随机查询多少条数据
+     *
+     * @param counts
+     * @return
+     */
+    public abstract List<T> limitQuery(long counts);
 
     /**
      * 查询全部

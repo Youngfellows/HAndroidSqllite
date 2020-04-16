@@ -60,6 +60,11 @@ public class PhoneDBHelper extends DBHelper<Phone> {
     }
 
     @Override
+    public List<Phone> limitQuery(long counts) {
+        return null;
+    }
+
+    @Override
     public List<Phone> queryAll() {
         //phone(brand,androidId,imei,serialNumber,mac)
         // 1.使用java提供的sql查询

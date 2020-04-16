@@ -69,6 +69,38 @@ public class PoiDBHelper extends DBHelper<Poi> {
         return null;
     }
 
+    @Override
+    public List<Poi> limitQuery(long counts) {
+        String sql = "select * from poi_data order by RANDOM() limit " + counts + ";";
+        SQLiteDatabase db = mDb;
+        Log.d(TAG, "queryAll : mDb = " + mDb);
+        Cursor cursor = db.rawQuery(sql, null);
+        List<Poi> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            int name_index = cursor.getColumnIndex("NAME");
+            int address_index = cursor.getColumnIndex("ADDRESS");
+            int city_index = cursor.getColumnIndex("CITY");
+            int district_index = cursor.getColumnIndex("DISTRICT");
+            int latitude_index = cursor.getColumnIndex("LATITUDE");
+            int longitude_index = cursor.getColumnIndex("LONGITUDE");
+            int category_index = cursor.getColumnIndex("CATEGORY");
+
+            String name = cursor.getString(name_index);
+            String address = cursor.getString(address_index);
+            String city = cursor.getString(city_index);
+            String district = cursor.getString(district_index);
+            double latitude = cursor.getDouble(latitude_index);
+            double longitude = cursor.getDouble(longitude_index);
+            String category = cursor.getString(category_index);
+
+            Poi poi = new Poi(name, address, city, district, latitude, longitude, category);
+            list.add(poi);
+        }
+        cursor.close();
+        Log.d(TAG, "queryAll success ... ");
+        return list;
+    }
+
     /**
      * 查询POI列表
      *

@@ -60,6 +60,31 @@ public class PassengerDBHelper extends DBHelper<Passenger> {
     }
 
     @Override
+    public List<Passenger> limitQuery(long counts) {
+        String sql = "select * from passenger order by RANDOM() limit " + counts + ";";
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(sql, null);
+        List<Passenger> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            int serialNumber_index = cursor.getColumnIndex("serialNumber");
+            int name_index = cursor.getColumnIndex("name");
+            int nickName_index = cursor.getColumnIndex("nickName");
+            int birthday_index = cursor.getColumnIndex("birthday");
+            int phoneNumber_index = cursor.getColumnIndex("phoneNumber");
+
+            String serialNumber = cursor.getString(serialNumber_index);
+            String name = cursor.getString(name_index);
+            String nickName = cursor.getString(nickName_index);
+            String birthday = cursor.getString(birthday_index);
+            String phoneNumber = cursor.getString(phoneNumber_index);
+            Passenger passenger = new Passenger(serialNumber, name, nickName, birthday, phoneNumber);
+            list.add(passenger);
+        }
+        cursor.close();
+        return list;
+    }
+
+    @Override
     public List<Passenger> queryAll() {
         // 1.使用java提供的sql查询
         List<Passenger> list = new ArrayList<>();
