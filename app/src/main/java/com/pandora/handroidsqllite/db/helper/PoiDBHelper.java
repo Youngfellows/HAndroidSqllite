@@ -64,6 +64,11 @@ public class PoiDBHelper extends DBHelper<Poi> {
         return poi;
     }
 
+    @Override
+    public Poi besidesQuery(Poi poi) {
+        return null;
+    }
+
     /**
      * 查询POI列表
      *

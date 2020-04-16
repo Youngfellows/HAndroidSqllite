@@ -55,6 +55,11 @@ public class PassengerDBHelper extends DBHelper<Passenger> {
     }
 
     @Override
+    public Passenger besidesQuery(Passenger passenger) {
+        return null;
+    }
+
+    @Override
     public List<Passenger> queryAll() {
         // 1.使用java提供的sql查询
         List<Passenger> list = new ArrayList<>();

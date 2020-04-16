@@ -532,6 +532,35 @@ public class SQLBaseActivity extends PermissionsActivity {
         new Thread(mRandomQueryCarTask).start();
     }
 
+    /**
+     * 查询车辆
+     *
+     * @param view
+     */
+    public void onRandomCar2(View view) {
+        new Thread(mRandomQueryCarTask2).start();
+    }
+
+
+    private Runnable mRandomQueryCarTask2 = new Runnable() {
+        @Override
+        public void run() {
+            Car queryCar = CarDBHelper.getInstance().query();
+            Log.d(TAG, "run: queryCar: " + queryCar.toString());
+            Car car = CarDBHelper.getInstance().besidesQuery(queryCar);
+
+            String car_str = car.toString();
+            Log.d(TAG, "run: query car: " + car_str);
+            List<Student> students = new ArrayList<>();
+
+            //测试使用
+            Student student = new Student();
+            student.setName(car_str);
+            students.add(student);
+            //更新UI
+            mMainHandler.post(new ShowPoiTask(students));
+        }
+    };
 
     private Runnable mRandomQueryCarTask = new Runnable() {
         @Override

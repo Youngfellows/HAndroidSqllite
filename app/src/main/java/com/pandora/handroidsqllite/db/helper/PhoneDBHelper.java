@@ -55,6 +55,11 @@ public class PhoneDBHelper extends DBHelper<Phone> {
     }
 
     @Override
+    public Phone besidesQuery(Phone phone) {
+        return null;
+    }
+
+    @Override
     public List<Phone> queryAll() {
         //phone(brand,androidId,imei,serialNumber,mac)
         // 1.使用java提供的sql查询

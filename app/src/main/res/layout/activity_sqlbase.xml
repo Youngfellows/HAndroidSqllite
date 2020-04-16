@@ -113,6 +113,37 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onAddData"
+            android:text="添加"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onUpdataData"
+            android:text="更新"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onDelData"
+            android:text="删除"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onQueryData"
+            android:text="查询"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:onClick="onRandomDriver"
             android:text="查询司机"/>
 
@@ -146,29 +177,12 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onAddData"
-            android:text="添加"/>
+            android:onClick="onRandomCar2"
+            android:text="查询指定车辆外的一辆"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onUpdataData"
-            android:text="更新"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onDelData"
-            android:text="删除"/>
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onQueryData"
-            android:text="查询"/>
 
     </LinearLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_student"

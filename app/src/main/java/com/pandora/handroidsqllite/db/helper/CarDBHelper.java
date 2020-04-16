@@ -55,6 +55,32 @@ public class CarDBHelper extends DBHelper<Car> {
     }
 
     @Override
+    public Car besidesQuery(Car car) {
+        String sql = "select * from car where not vin='" + car.getVin() + "' order by RANDOM() limit 1;";
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(sql, null);
+        Log.d(TAG, "besidesQuery: random query sql: " + sql);
+        Car queryCar = null;
+        while (cursor.moveToNext()) {
+            int carNumber_index = cursor.getColumnIndex("carNumber");
+            int vin_index = cursor.getColumnIndex("vin");
+            int plateNumber_index = cursor.getColumnIndex("plateNumber");
+            int brand_index = cursor.getColumnIndex("brand");
+            int colour_index = cursor.getColumnIndex("colour");
+
+            String carNumber = cursor.getString(carNumber_index);
+            String vin = cursor.getString(vin_index);
+            String plateNumber = cursor.getString(plateNumber_index);
+            String brand = cursor.getString(brand_index);
+            String colour = cursor.getString(colour_index);
+
+            queryCar = new Car(carNumber, vin, plateNumber, brand, colour);
+        }
+        cursor.close();
+        return queryCar;
+    }
+
+    @Override
     public List<Car> queryAll() {
         // 1.使用java提供的sql查询
         List<Car> list = new ArrayList<>();

@@ -80,6 +80,14 @@ public abstract class DBHelper<T> {
     public abstract T query();
 
     /**
+     * 查询除了指定条件之外的
+     *
+     * @param t
+     * @return
+     */
+    public abstract T besidesQuery(T t);
+
+    /**
      * 查询全部
      */
     public abstract List<T> queryAll();

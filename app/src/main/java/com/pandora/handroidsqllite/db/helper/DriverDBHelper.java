@@ -61,6 +61,11 @@ public class DriverDBHelper extends DBHelper<Driver> {
     }
 
     @Override
+    public Driver besidesQuery(Driver driver) {
+        return null;
+    }
+
+    @Override
     public List<Driver> queryAll() {
         // 1.使用java提供的sql查询
         List<Driver> list = new ArrayList<>();
