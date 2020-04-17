@@ -28,6 +28,17 @@ public class PhoneDBHelper extends DBHelper<Phone> {
     }
 
     @Override
+    public boolean isEmptyTable() {
+        String sql = "select * from phone;";
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(sql, null);
+        int counts = cursor.getCount();
+        cursor.close();
+        Log.d(TAG, "isEmptyTable: phone counts " + counts);
+        return counts == 0;
+    }
+
+    @Override
     public Phone query() {
         SQLiteDatabase db = getDatebase();
         //String queryRandomSql = "select * from phone order by RANDOM() desc limit 1;";

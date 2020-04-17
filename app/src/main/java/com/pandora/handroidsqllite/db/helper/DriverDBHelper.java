@@ -29,6 +29,17 @@ public class DriverDBHelper extends DBHelper<Driver> {
     }
 
     @Override
+    public boolean isEmptyTable() {
+        String sql = "select * from driver;";
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(sql, null);
+        int counts = cursor.getCount();
+        cursor.close();
+        Log.d(TAG, "isEmptyTable: driver counts " + counts);
+        return counts == 0;
+    }
+
+    @Override
     public Driver query() {
         SQLiteDatabase db = getDatebase();
         //String queryRandomSql = "select * from driver order by RANDOM() desc limit 1;";

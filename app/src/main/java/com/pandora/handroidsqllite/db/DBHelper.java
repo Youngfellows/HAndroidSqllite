@@ -48,18 +48,25 @@ public abstract class DBHelper<T> {
      * @param tableName：表名
      * @return
      */
-    protected boolean isTableExist(String tableName) {
+    public boolean isTableExist(String tableName) {
         Cursor cursor = getDatebase().rawQuery("select name from sqlite_master where type='table';", null);
         while (cursor.moveToNext()) {
             //遍历出表名
             String name = cursor.getString(0);
-            Log.d(TAG, "isTableExist: name: " + name);
             if (name.equals(tableName)) {
+                Log.d(TAG, "isTableExist: have " + name + " table");
                 return true;
             }
         }
         return false;
     }
+
+    /**
+     * 是否是一张空表
+     *
+     * @return
+     */
+    public abstract boolean isEmptyTable();
 
     /**
      * 获取数据库路径

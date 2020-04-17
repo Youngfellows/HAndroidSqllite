@@ -34,6 +34,22 @@ public class PoiDBHelper extends DBHelper<Poi> {
     }
 
     @Override
+    public boolean isTableExist(String tableName) {
+        return super.isTableExist(tableName);
+    }
+
+    @Override
+    public boolean isEmptyTable() {
+        String sql = "select * from POI_DATA;";
+        SQLiteDatabase db = mDb;
+        Cursor cursor = db.rawQuery(sql, null);
+        int counts = cursor.getCount();
+        cursor.close();
+        Log.d(TAG, "isEmptyTable: phone counts " + counts);
+        return counts == 0;
+    }
+
+    @Override
     public Poi query() {
         SQLiteDatabase db = mDb;
         //String queryRandomSql = "select * from poi_data order by RANDOM() desc limit 1;";

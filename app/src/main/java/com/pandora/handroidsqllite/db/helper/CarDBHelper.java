@@ -28,6 +28,17 @@ public class CarDBHelper extends DBHelper<Car> {
     }
 
     @Override
+    public boolean isEmptyTable() {
+        String sql = "select * from car;";
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(sql, null);
+        int counts = cursor.getCount();
+        cursor.close();
+        Log.d(TAG, "isEmptyTable: cars counts " + counts);
+        return counts == 0;
+    }
+
+    @Override
     public Car query() {
         SQLiteDatabase db = getDatebase();
         //String queryRandomSql = "select * from car order by RANDOM() desc limit 1;";

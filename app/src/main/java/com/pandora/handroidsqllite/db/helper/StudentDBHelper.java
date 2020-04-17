@@ -29,6 +29,11 @@ public class StudentDBHelper extends DBHelper<Student> {
     }
 
     @Override
+    public boolean isEmptyTable() {
+        return false;
+    }
+
+    @Override
     public Student query() {
         return null;
     }

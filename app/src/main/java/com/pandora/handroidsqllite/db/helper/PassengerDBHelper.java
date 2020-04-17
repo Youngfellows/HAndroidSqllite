@@ -29,6 +29,17 @@ public class PassengerDBHelper extends DBHelper<Passenger> {
     }
 
     @Override
+    public boolean isEmptyTable() {
+        String sql = "select * from passenger;";
+        SQLiteDatabase db = getDatebase();
+        Cursor cursor = db.rawQuery(sql, null);
+        int counts = cursor.getCount();
+        cursor.close();
+        Log.d(TAG, "isEmptyTable: passenger counts " + counts);
+        return counts == 0;
+    }
+
+    @Override
     public Passenger query() {
         SQLiteDatabase db = getDatebase();
         //String queryRandomSql = "select * from passenger order by RANDOM() desc limit 1;";
