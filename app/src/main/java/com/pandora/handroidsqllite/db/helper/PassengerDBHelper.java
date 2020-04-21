@@ -152,6 +152,15 @@ public class PassengerDBHelper extends DBHelper<Passenger> {
     }
 
     @Override
+    public boolean delete() {
+        String sql = "delete from passenger;";
+        SQLiteDatabase db = getDatebase();
+        db.execSQL(sql);
+        Log.d(TAG, "delete: delete passenger table");
+        return true;
+    }
+
+    @Override
     public boolean update(Passenger passenger) {
         return false;
     }
