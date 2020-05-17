@@ -3,6 +3,7 @@ package com.pandora.handroidsqllite;
 import android.Manifest;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -15,6 +16,7 @@ import com.pandora.handroidsqllite.db.helper.PassengerDBHelper;
 import com.pandora.handroidsqllite.db.helper.PhoneDBHelper;
 import com.pandora.handroidsqllite.db.helper.PoiDBHelper;
 import com.pandora.handroidsqllite.parser.JSONParser;
+import com.pandora.handroidsqllite.service.KeepAliveService;
 
 
 public class MyApp extends Application {
@@ -50,8 +52,23 @@ public class MyApp extends Application {
     }
 
     private void init() {
+        startService();
         if (checkPermissions(needPermissions)) {
             initCarRobotData();
+        }
+    }
+
+    /**
+     * 初始化Driver服务
+     */
+    private void startService() {
+        Intent intent = new Intent();
+        intent.setClass(this, KeepAliveService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Log.i(TAG, "> Android 8.0 ");
+            startForegroundService(intent);
+        } else {
+            startService(intent);
         }
     }
 
