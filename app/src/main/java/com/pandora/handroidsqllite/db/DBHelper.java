@@ -118,6 +118,11 @@ public abstract class DBHelper<T> {
     public abstract boolean delete(T t);
 
     /**
+     * 删除表
+     */
+    public abstract boolean delete();
+
+    /**
      * 更新
      */
     public abstract boolean update(T t);

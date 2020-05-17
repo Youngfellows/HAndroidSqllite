@@ -134,6 +134,15 @@ public class PhoneDBHelper extends DBHelper<Phone> {
     }
 
     @Override
+    public boolean delete() {
+        String sql = "delete from phone;";
+        SQLiteDatabase db = getDatebase();
+        db.execSQL(sql);
+        Log.d(TAG, "delete: delete phone table");
+        return true;
+    }
+
+    @Override
     public boolean update(Phone phone) {
         return false;
     }

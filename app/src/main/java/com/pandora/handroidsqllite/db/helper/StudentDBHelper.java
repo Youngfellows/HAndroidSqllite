@@ -133,6 +133,11 @@ public class StudentDBHelper extends DBHelper<Student> {
     }
 
     @Override
+    public boolean delete() {
+        return false;
+    }
+
+    @Override
     public boolean update(Student student) {
         // 1.使用SQL方式更新
         //        String sql = "update student set age=" + student.getAge() + " where name='" + student.getName() + "';";

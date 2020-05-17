@@ -178,6 +178,15 @@ public class DriverDBHelper extends DBHelper<Driver> {
     }
 
     @Override
+    public boolean delete() {
+        String sql = "delete from driver;";
+        SQLiteDatabase db = getDatebase();
+        db.execSQL(sql);
+        Log.d(TAG, "delete: delete driver table");
+        return true;
+    }
+
+    @Override
     public boolean update(Driver driver) {
         return false;
     }

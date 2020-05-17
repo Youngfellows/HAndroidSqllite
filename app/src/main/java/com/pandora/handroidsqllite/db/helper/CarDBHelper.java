@@ -177,6 +177,15 @@ public class CarDBHelper extends DBHelper<Car> {
     }
 
     @Override
+    public boolean delete() {
+        String sql = "delete from car;";
+        SQLiteDatabase db = getDatebase();
+        db.execSQL(sql);
+        Log.d(TAG, "delete: delete car table");
+        return true;
+    }
+
+    @Override
     public boolean update(Car car) {
         return false;
     }

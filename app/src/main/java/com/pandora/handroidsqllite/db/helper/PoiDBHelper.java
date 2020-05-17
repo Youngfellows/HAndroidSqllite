@@ -165,6 +165,11 @@ public class PoiDBHelper extends DBHelper<Poi> {
     }
 
     @Override
+    public boolean delete() {
+        return false;
+    }
+
+    @Override
     public boolean update(Poi poi) {
         return false;
     }
